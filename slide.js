@@ -1,7 +1,6 @@
 var slideImages = new Array("img/pig1.jpg", "img/pig2.jpg", "img/pig3.jpg");
 var num = -1;
 
-
 slideshow();
 
 function slideshow() {
@@ -15,31 +14,31 @@ function slideshow() {
     setTimeout("slideshow()",1000);
 }
 
-// <------------->
+// <------以下jQuery使用------->
 
-var fadeImages = ['#img1', '#img2', '#img3', 'img4']
-var num2 = -1
+$('#img2, #img3').hide();
 
-var interval = function fadeImg() {
-    if(num2 < 0) {
-        index ++;
-        return;
-    } else {
-        $(fadeImages[num2]).fadeOut(500);
+var fadeImages = ['#img1', '#img2', '#img3'];
+var num2 = 0;
+var interval = function() {
+    if(num2 == 0) {
+        $(fadeImages[num2]).fadeOut(1000);
         num2 ++;
-        num2 %= fadeImages.length;
-        $(fadeImages[num2]).fadeIn(500);
-    }
+        $(fadeImages[num2]).fadeIn(3000);    
+        return;
+    } 
+    if (num2 == 1) {
+        $(fadeImages[num2]).fadeOut(1000);
+        num2 ++;
+        $(fadeImages[num2]).fadeIn(3000);    
+        return;
+    };
+    if (num2 == 2) {
+        $(fadeImages[num2]).fadeOut(1000);
+        num2 %= num2;
+        $(fadeImages[num2]).fadeIn(3000);  
+        return;
+    };
 };
-setInterval("interval", 1000);
 
-var services = ['#service01', '#service02', '#service03','#service04'];
-var index = -1;
-var doService = function(){
-  if(index < 0) { index++; return; }
-  $(services[index]).fadeOut(500);
-  index++;
-  index %= services.length;
-  $(services[index]).fadeIn();
-};
-setInterval(doService, 3000);
+setInterval(interval, 5000);
